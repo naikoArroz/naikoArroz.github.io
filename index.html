@@ -3,35 +3,42 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Naiko Arroz | Portfolio</title>
+    <title>Naiko Arroz | Midnight Portfolio</title>
     <style>
         :root {
-            --bg-1: #071421;
-            --bg-2: #0d1d2d;
-            --panel: rgba(12, 26, 35, 0.82);
-            --panel-strong: rgba(15, 29, 40, 0.96);
-            --line: rgba(114, 181, 197, 0.38);
-            --text: #eaf6ff;
-            --muted: #a9c6d3;
-            --accent: #7ad6ff;
-            --accent-2: #92f7d0;
-            --highlight: #ffd76e;
-            --danger: #ff7e8d;
-            --shadow: rgba(3, 11, 17, 0.7);
+            --bg-1: #0c1220;
+            --bg-2: #171d2f;
+            --bg-3: #080d19;
+            --panel: rgba(11, 17, 30, 0.82);
+            --panel-strong: rgba(18, 23, 35, 0.95);
+            --screen: #f4d35e;
+            --screen-2: #ffd75a;
+            --ink: #121212;
+            --text: #f6f5ef;
+            --muted: #d7d3c7;
+            --line: rgba(255, 214, 92, 0.45);
+            --glow: rgba(255, 212, 73, 0.9);
+            --cyan: #77e7ff;
+            --cyan-soft: rgba(119, 231, 255, 0.12);
+            --green: #a1ffd6;
+            --shadow: rgba(0, 0, 0, 0.6);
         }
 
         * { box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             margin: 0;
+            min-height: 100vh;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at top, rgba(122, 214, 255, 0.18), transparent 28%),
-                linear-gradient(180deg, var(--bg-1), var(--bg-2) 35%, #07121c 100%);
-            min-height: 100vh;
+                radial-gradient(circle at top, rgba(255, 214, 92, 0.14), transparent 30%),
+                linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 35%, var(--bg-3) 100%);
+            overflow-x: hidden;
         }
 
         body::before {
@@ -39,112 +46,139 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 28px 28px;
-            mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,0.04),
+                rgba(255,255,255,0.04) 1px,
+                transparent 2px,
+                transparent 4px
+            );
+            opacity: 0.45;
+            mix-blend-mode: screen;
         }
 
         .container {
-            width: min(1100px, calc(100% - 32px));
+            width: min(1100px, calc(100% - 30px));
             margin: 0 auto;
         }
 
         .topbar {
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 30;
+            background: rgba(9, 12, 19, 0.68);
             backdrop-filter: blur(12px);
-            background: rgba(7, 20, 33, 0.55);
-            border-bottom: 1px solid rgba(122, 214, 255, 0.14);
+            border-bottom: 1px solid rgba(255, 214, 92, 0.22);
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 0;
+            min-height: 76px;
         }
 
         .brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 800;
-            letter-spacing: 0.08em;
+            font-weight: 900;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: var(--screen-2);
+            text-shadow: 0 0 18px rgba(255, 214, 92, 0.7);
         }
 
         .brand-mark {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            box-shadow: 0 0 18px rgba(122, 214, 255, 0.9);
+            background: linear-gradient(135deg, var(--screen-2), #fff7c2);
+            box-shadow: 0 0 18px rgba(255, 214, 92, 0.9);
         }
 
         .nav-links {
             display: flex;
-            gap: 24px;
+            align-items: center;
+            gap: 22px;
             flex-wrap: wrap;
         }
 
         .nav-links a {
             color: var(--muted);
             text-decoration: none;
+            font-weight: 600;
+            position: relative;
             transition: color 0.2s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 2px;
+            background: var(--screen-2);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.2s ease;
+            box-shadow: 0 0 12px rgba(255, 214, 92, 0.7);
         }
 
         .nav-links a:hover {
             color: var(--text);
         }
 
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
         .hero {
-            padding: 72px 0 48px;
+            padding: 56px 0 32px;
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.3fr 0.7fr;
-            gap: 32px;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 28px;
             align-items: center;
         }
 
         .eyebrow {
             display: inline-block;
-            padding: 8px 14px;
             border: 1px solid var(--line);
+            color: var(--screen-2);
+            background: rgba(255, 214, 92, 0.08);
+            padding: 9px 14px;
             border-radius: 999px;
-            color: var(--accent);
-            background: rgba(122, 214, 255, 0.08);
-            font-size: 0.8rem;
-            letter-spacing: 0.12em;
             text-transform: uppercase;
-            margin-bottom: 16px;
+            letter-spacing: 0.14em;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            box-shadow: 0 0 18px rgba(255, 214, 92, 0.14);
         }
 
         h1 {
-            font-size: clamp(2.6rem, 6vw, 5rem);
-            line-height: 1;
             margin: 0 0 18px;
-            letter-spacing: -0.06em;
+            font-size: clamp(2.8rem, 6vw, 5.2rem);
+            line-height: 0.96;
+            letter-spacing: -0.08em;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, var(--text), var(--accent), var(--accent-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .accent {
+            display: inline-block;
+            color: var(--screen-2);
+            text-shadow: 0 0 18px rgba(255, 214, 92, 0.7);
         }
 
         .lead {
             max-width: 620px;
-            font-size: 1.1rem;
             color: var(--muted);
-            line-height: 1.75;
-            margin: 0 0 26px;
+            font-size: 1.12rem;
+            line-height: 1.9;
+            margin: 0 0 28px;
         }
 
         .cta-row {
@@ -158,11 +192,10 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 24px;
-            border-radius: 12px;
+            padding: 14px 22px;
+            border-radius: 14px;
             text-decoration: none;
-            font-weight: 700;
-            border: 1px solid transparent;
+            font-weight: 800;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -171,127 +204,179 @@
         }
 
         .button.primary {
-            background: linear-gradient(135deg, var(--accent), #5bbdf6);
-            color: #062234;
-            box-shadow: 0 10px 30px rgba(122, 214, 255, 0.35);
+            background: linear-gradient(135deg, var(--screen), #f7d95e);
+            color: #1a1800;
+            box-shadow: 0 12px 28px rgba(255, 214, 92, 0.38);
         }
 
         .button.secondary {
             color: var(--text);
-            border-color: var(--line);
+            border: 1px solid var(--line);
             background: rgba(255,255,255,0.02);
         }
 
         .stats {
             display: flex;
-            gap: 18px;
             flex-wrap: wrap;
+            gap: 14px;
             color: var(--muted);
         }
 
         .stat {
-            min-width: 110px;
+            min-width: 120px;
             padding: 14px 18px;
+            border-radius: 18px;
             background: rgba(255,255,255,0.02);
             border: 1px solid var(--line);
-            border-radius: 16px;
+            box-shadow: inset 0 0 18px rgba(255, 214, 92, 0.04);
         }
 
         .stat strong {
             display: block;
-            font-size: 1.4rem;
-            color: var(--text);
-            margin-bottom: 6px;
+            color: var(--screen-2);
+            font-size: 1.5rem;
+            margin-bottom: 4px;
         }
 
-        .profile-card {
+        .screen-card {
             position: relative;
-            background: linear-gradient(180deg, rgba(15, 29, 40, 0.88), rgba(8, 17, 25, 0.9));
-            border: 1px solid var(--line);
-            border-radius: 30px;
-            padding: 22px;
-            box-shadow: 0 20px 60px var(--shadow);
+            background: linear-gradient(180deg, rgba(18, 24, 36, 0.9), rgba(9, 14, 22, 0.95));
+            border: 2px solid rgba(255, 214, 92, 0.38);
+            border-radius: 28px;
+            padding: 18px;
+            box-shadow:
+                0 0 0 3px rgba(255,214,92,0.08),
+                0 26px 60px rgba(0,0,0,0.56),
+                0 0 30px rgba(255,214,92,0.12);
         }
 
-        .profile-card::before {
+        .screen-card::before {
             content: "";
             position: absolute;
-            inset: 18px;
+            inset: 14px;
+            border: 1px solid rgba(255, 214, 92, 0.3);
+            border-radius: 18px;
+            pointer-events: none;
+        }
+
+        .tv-face {
+            position: relative;
+            overflow: hidden;
             border-radius: 24px;
-            border: 1px solid rgba(122, 214, 255, 0.22);
+            background:
+                linear-gradient(180deg, rgba(255, 214, 92, 0.08), rgba(255, 214, 92, 0.02)),
+                linear-gradient(135deg, rgba(21, 27, 38, 0.9), rgba(12, 16, 24, 1));
+            border: 1px solid rgba(255, 214, 92, 0.20);
+            padding: 20px;
+            min-height: 440px;
+        }
+
+        .tv-face::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(rgba(255,255,255,0.06), transparent 20%),
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,0.04),
+                    rgba(255,255,255,0.04) 2px,
+                    transparent 2px,
+                    transparent 6px
+                );
             pointer-events: none;
         }
 
         .portrait-wrap {
             position: relative;
+            z-index: 1;
             display: grid;
             place-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .portrait {
-            width: min(270px, 100%);
+            width: min(285px, 100%);
             aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 28px;
-            border: 2px solid rgba(122, 214, 255, 0.4);
-            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(135deg, rgba(122,214,255,0.18), rgba(146,247,208,0.18));
+            border-radius: 26px;
+            border: 2px solid rgba(255, 214, 92, 0.35);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.46);
+            background: linear-gradient(135deg, rgba(255,214,92,0.12), rgba(119,231,255,0.08));
         }
 
-        .badge {
+        .live-badge {
             position: absolute;
-            bottom: 12px;
-            right: 22px;
-            background: rgba(11, 19, 26, 0.95);
-            border: 1px solid rgba(255, 215, 110, 0.4);
-            color: var(--highlight);
+            right: 18px;
+            bottom: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(14, 20, 28, 0.9);
+            border: 1px solid rgba(255, 214, 92, 0.35);
+            color: var(--screen-2);
             border-radius: 999px;
             padding: 8px 12px;
-            font-size: 0.76rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
+            font-size: 0.68rem;
+            font-weight: 700;
+            z-index: 1;
         }
 
-        .mini-card {
-            background: rgba(255,255,255,0.025);
-            border: 1px solid var(--line);
+        .live-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--screen-2);
+            box-shadow: 0 0 18px rgba(255, 214, 92, 0.9);
+        }
+
+        .tv-info {
+            position: relative;
+            z-index: 1;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,214,92,0.18);
             border-radius: 18px;
             padding: 14px 16px;
-            margin-top: 14px;
             color: var(--muted);
-            line-height: 1.6;
+            line-height: 1.7;
+        }
+
+        .tv-info strong {
+            color: var(--screen-2);
         }
 
         .section {
-            padding: 48px 0;
+            padding: 34px 0 18px;
         }
 
         .section-header {
             display: flex;
+            align-items: flex-end;
             justify-content: space-between;
-            align-items: end;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 14px;
+            margin-bottom: 20px;
         }
 
         .section-header h2 {
-            font-size: clamp(2rem, 3vw, 2.8rem);
             margin: 0;
-            letter-spacing: -0.05em;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            letter-spacing: -0.06em;
         }
 
         .section-header span {
-            color: var(--accent);
-            letter-spacing: 0.18em;
+            color: var(--screen-2);
             text-transform: uppercase;
+            letter-spacing: 0.18em;
             font-size: 0.72rem;
+            font-weight: 700;
         }
 
         .about-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 24px;
+            gap: 22px;
         }
 
         .panel {
@@ -299,14 +384,25 @@
             border: 1px solid var(--line);
             border-radius: 24px;
             padding: 24px;
-            box-shadow: 0 20px 40px rgba(4, 12, 18, 0.45);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.28);
+            position: relative;
+        }
+
+        .panel::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto auto 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--screen-2), var(--cyan), var(--green));
+            border-radius: 24px 24px 0 0;
         }
 
         .panel p {
-            color: var(--muted);
-            line-height: 1.8;
-            font-size: 1.03rem;
             margin: 0;
+            color: var(--muted);
+            line-height: 1.85;
+            font-size: 1.04rem;
         }
 
         .skills {
@@ -318,32 +414,32 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(122,214,255,0.18);
-            border-radius: 14px;
+            gap: 10px;
             padding: 14px 16px;
-            color: var(--text);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,214,92,0.18);
         }
 
         .skill-item span:last-child {
-            color: var(--accent-2);
+            color: var(--screen-2);
             font-weight: 700;
         }
 
         .projects {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 20px;
+            gap: 18px;
         }
 
         .project-card {
-            background: linear-gradient(180deg, rgba(15, 29, 40, 0.9), rgba(8, 17, 25, 0.78));
-            border: 1px solid var(--line);
-            border-radius: 22px;
-            padding: 20px;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(180deg, rgba(17, 23, 34, 0.96), rgba(9, 14, 22, 0.9));
+            border: 1px solid rgba(255,214,92,0.2);
+            border-radius: 22px;
+            padding: 20px;
+            box-shadow: inset 0 0 22px rgba(255, 214, 92, 0.04);
         }
 
         .project-card::before {
@@ -352,18 +448,18 @@
             inset: 0 auto auto 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--highlight));
+            background: linear-gradient(90deg, var(--screen-2), var(--cyan), var(--green));
         }
 
         .project-tag {
             display: inline-block;
-            color: var(--highlight);
-            background: rgba(255, 215, 110, 0.08);
-            border: 1px solid rgba(255, 215, 110, 0.25);
+            background: rgba(255,214,92,0.08);
+            border: 1px solid rgba(255,214,92,0.22);
+            color: var(--screen-2);
             border-radius: 999px;
-            padding: 7px 10px;
+            padding: 7px 11px;
             font-size: 0.7rem;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             margin-bottom: 14px;
         }
@@ -374,9 +470,9 @@
         }
 
         .project-card p {
+            margin: 0 0 18px;
             color: var(--muted);
-            line-height: 1.7;
-            margin: 0 0 16px;
+            line-height: 1.8;
         }
 
         .project-meta {
@@ -389,35 +485,35 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
             padding: 7px 10px;
             border-radius: 999px;
-            background: rgba(122,214,255,0.08);
-            border: 1px solid rgba(122,214,255,0.18);
-            color: var(--accent);
+            font-size: 0.72rem;
+            background: rgba(119,231,255,0.08);
+            border: 1px solid rgba(119,231,255,0.2);
+            color: var(--cyan);
+            font-weight: 600;
         }
 
         .contact {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 24px;
-            align-items: stretch;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 22px;
         }
 
         .socials {
             display: grid;
-            gap: 14px;
+            gap: 12px;
         }
 
         .social {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             gap: 10px;
             padding: 14px 16px;
             border-radius: 14px;
             background: rgba(255,255,255,0.02);
-            border: 1px solid var(--line);
+            border: 1px solid rgba(255,214,92,0.18);
         }
 
         .social strong {
@@ -429,13 +525,16 @@
         }
 
         .footer {
-            padding: 32px 0 60px;
-            color: var(--muted);
+            padding: 28px 0 52px;
             text-align: center;
+            color: var(--muted);
         }
 
         @media (max-width: 900px) {
-            .hero-grid, .about-grid, .contact, .projects {
+            .hero-grid,
+            .about-grid,
+            .contact,
+            .projects {
                 grid-template-columns: 1fr;
             }
         }
@@ -443,20 +542,22 @@
         @media (max-width: 560px) {
             .nav {
                 flex-direction: column;
+                justify-content: center;
                 gap: 10px;
+                padding: 14px 0;
             }
 
             .nav-links {
                 justify-content: center;
             }
 
-            .hero {
-                padding-top: 42px;
-            }
-
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+
+            .hero {
+                padding-top: 32px;
             }
         }
     </style>
@@ -481,18 +582,17 @@
         <section class="hero">
             <div class="hero-grid">
                 <div>
-                    <div class="eyebrow">Persona 4-inspired portfolio</div>
+                    <div class="eyebrow">Now Loading...</div>
                     <h1>
-                        Eu sou <span class="gradient-text">Naiko</span>,<br />
-                        criador e dev em busca de próxima missão.
+                        Eu sou <span class="accent">Naiko</span>,<br />
+                        e essa é a minha história em tela.
                     </h1>
                     <p class="lead">
-                        Transformo ideias em experiências com foco em identidade visual, design, desenvolvimento e narrativa.
-                        Gosto de criar projetos que misturam funcionalidade, estilo e personalidade forte.
+                        Crio experiências visuais com personalidade, energia e narrativas fortes. Gosto de unir estética, desenvolvimento e sentimento em um só projeto, como uma cena que prende a atenção e não sai da cabeça.
                     </p>
                     <div class="cta-row">
                         <a class="button primary" href="#projetos">Ver projetos</a>
-                        <a class="button secondary" href="#contato">Entre em contato</a>
+                        <a class="button secondary" href="#contato">Falar comigo</a>
                     </div>
                     <div class="stats">
                         <div class="stat">
@@ -501,23 +601,25 @@
                         </div>
                         <div class="stat">
                             <strong>6+</strong>
-                            projetos criados
+                            projetos
                         </div>
                         <div class="stat">
                             <strong>∞</strong>
-                            ideias em desenvolvimento
+                            ideias
                         </div>
                     </div>
                 </div>
 
-                <aside class="profile-card" aria-label="Perfil do artista">
-                    <div class="portrait-wrap">
-                        <img class="portrait" src="calmacalabreso.jfif" alt="Retrato de Naiko" />
-                        <span class="badge">Investigator</span>
-                    </div>
-                    <div class="mini-card">
-                        <strong>Protagonista da minha própria jornada</strong><br />
-                        Designer, dev e curioso por mundos digitais.
+                <aside class="screen-card" aria-label="Perfil e identidade visual">
+                    <div class="tv-face">
+                        <div class="portrait-wrap">
+                            <img class="portrait" src="calmacalabreso.jfif" alt="Naiko em estilo retrato" />
+                        </div>
+                        <div class="live-badge"><span class="live-dot"></span> Live</div>
+                        <div class="tv-info">
+                            <strong>Protagonista da própria jornada.</strong><br />
+                            Design, web e criatividade em ritmo de cidade noturna.
+                        </div>
                     </div>
                 </aside>
             </div>
@@ -531,17 +633,15 @@
             <div class="about-grid">
                 <div class="panel">
                     <p>
-                        Meu nome é Naiko e eu gosto de construir experiências que têm cara própria. Sou apaixonado por estética visual,
-                        identidade e desenvolvimento de projetos que conectam design, código e emoção. Desde pequenos experimentos
-                        até ideias maiores, gosto de transformar conceitos em algo que as pessoas possam sentir e lembrar.
+                        Meu nome é Naiko e eu gosto de transformar ideias em experiências que têm cara própria. Sou movido por estética, identidade visual e uma certa energia de mistério que me acompanha em tudo que faço. O que me chama atenção é criar algo que tenha personalidade forte, funcionalidade real e uma presença marcante.
                     </p>
                 </div>
-                <div class="panel">
-                    <div class="skills" id="habilidades">
+                <div class="panel" id="habilidades">
+                    <div class="skills">
                         <div class="skill-item"><span>Design visual</span><span>Alta</span></div>
                         <div class="skill-item"><span>HTML / CSS</span><span>Alta</span></div>
-                        <div class="skill-item"><span>Criação de identidade</span><span>Alta</span></div>
-                        <div class="skill-item"><span>UX/UI</span><span>Média</span></div>
+                        <div class="skill-item"><span>Criação de marca</span><span>Alta</span></div>
+                        <div class="skill-item"><span>UI/UX</span><span>Média</span></div>
                     </div>
                 </div>
             </div>
@@ -555,19 +655,19 @@
             <div class="projects">
                 <article class="project-card">
                     <div class="project-tag">Web</div>
-                    <h3>Portfólio pessoal</h3>
-                    <p>Uma página com visual forte, narrativa envolvente e foco em apresentar minhas ideias e personalidade.</p>
+                    <h3>Portfólio</h3>
+                    <p>Uma página pessoal com presença visual forte, narrativa envolvente e identidade marcante no estilo de cidade noturna.</p>
                     <div class="project-meta">
                         <span class="chip">HTML</span>
                         <span class="chip">CSS</span>
-                        <span class="chip">Design</span>
+                        <span class="chip">Visual</span>
                     </div>
                 </article>
 
                 <article class="project-card">
-                    <div class="project-tag">Visual</div>
+                    <div class="project-tag">Brand</div>
                     <h3>Estética de marca</h3>
-                    <p>Criação de identidade visual com apelo emocional, tom misterioso e linguagem criativa para posicionamento digital.</p>
+                    <p>Criação visual com sensação de mistério, energia e personalidade, pensada para dar cara e presença ao projeto.</p>
                     <div class="project-meta">
                         <span class="chip">Branding</span>
                         <span class="chip">Art</span>
@@ -576,12 +676,12 @@
                 </article>
 
                 <article class="project-card">
-                    <div class="project-tag">Experiência</div>
+                    <div class="project-tag">UI</div>
                     <h3>Interfaces criativas</h3>
-                    <p>Exploração de layouts que unem navegação fluida, sensação atmosférica e apelo visual memorable.</p>
+                    <p>Exploração de layouts com sensação de TV, neon, movimento e personalidade, sem perder a usabilidade.</p>
                     <div class="project-meta">
-                        <span class="chip">UI</span>
                         <span class="chip">UX</span>
+                        <span class="chip">UI</span>
                         <span class="chip">Prototype</span>
                     </div>
                 </article>
@@ -596,8 +696,7 @@
             <div class="contact">
                 <div class="panel">
                     <p>
-                        Se quiser bater um papo sobre design, desenvolvimento, ideias ou projetos criativos, pode me chamar.
-                        Tenho interesse em colaborar com pessoas que gostam de criar coisas com personalidade e propósito.
+                        Se quiser conversar sobre design, desenvolvimento, ideias, projetos visuais ou qualquer coisa criativa, pode me chamar. Eu gosto de colaborar com quem valoriza personalidade e conceito.
                     </p>
                 </div>
                 <div class="panel socials">
@@ -619,7 +718,7 @@
     </main>
 
     <footer class="footer container">
-        © 2026 Naiko Arroz — feito com energia de midnight city vibes.
+        © 2026 Naiko Arroz — feito com a energia de uma noite iluminada.
     </footer>
 </body>
 </html>
