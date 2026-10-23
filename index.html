@@ -25,7 +25,6 @@
         }
 
         * { box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -44,14 +43,13 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            background:
-                repeating-linear-gradient(
-                    to bottom,
-                    rgba(255,255,255,0.04),
-                    rgba(255,255,255,0.04) 1px,
-                    transparent 2px,
-                    transparent 4px
-                );
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,0.04),
+                rgba(255,255,255,0.04) 1px,
+                transparent 2px,
+                transparent 4px
+            );
             opacity: 0.5;
             z-index: 0;
         }
@@ -248,8 +246,8 @@
             z-index: 1;
             border: 1px solid rgba(255,214,92,0.18);
             background: rgba(255,255,255,0.015);
+            min-height: 700px;
             padding: 18px 18px 8px;
-            height: 100%;
             overflow: hidden;
         }
 
@@ -268,6 +266,22 @@
                 );
             opacity: 0.55;
             pointer-events: none;
+        }
+
+        .page-section {
+            position: relative;
+            z-index: 1;
+            display: block;
+            animation: fadeInSection 0.35s ease;
+        }
+
+        @keyframes fadeInSection {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-section.hidden {
+            display: none;
         }
 
         .topbar-mini {
@@ -370,6 +384,7 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             position: relative;
             z-index: 1;
+            cursor: pointer;
         }
 
         .action.primary {
@@ -419,7 +434,7 @@
             letter-spacing: 0.1em;
         }
 
-        .lower-grid {
+        .section-grid {
             margin-top: 18px;
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -508,6 +523,28 @@
             font-size: 0.82rem;
         }
 
+        .skills-grid {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .skill-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border: 1px solid rgba(255,214,92,0.18);
+            background: rgba(255,255,255,0.02);
+            color: var(--text);
+        }
+
+        .skill-row span:last-child {
+            color: var(--icon-yellow);
+            font-weight: 700;
+        }
+
         .music-panel {
             margin-top: 18px;
             padding: 12px 14px;
@@ -591,14 +628,13 @@
         }
 
         .loading-screen::before {
-            background:
-                repeating-linear-gradient(
-                    to bottom,
-                    rgba(255,255,255,0.035),
-                    rgba(255,255,255,0.035) 1px,
-                    transparent 2px,
-                    transparent 6px
-                );
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,0.035),
+                rgba(255,255,255,0.035) 1px,
+                transparent 2px,
+                transparent 6px
+            );
             opacity: 0.5;
         }
 
@@ -668,7 +704,7 @@
                 border-bottom: 1px solid rgba(255,214,92,0.18);
             }
 
-            .lower-grid,
+            .section-grid,
             .stats-grid,
             .hero-box {
                 grid-template-columns: 1fr;
@@ -718,10 +754,10 @@
             <aside class="sidebar">
                 <h2 class="sidebar-title">Main Menu</h2>
                 <div class="menu-list" aria-label="Menu principal">
-                    <div class="menu-item active" tabindex="0" role="button" aria-label="Perfil"><span>Profile</span><span>01</span></div>
-                    <div class="menu-item" tabindex="0" role="button" aria-label="Habilidades"><span>Skills</span><span>02</span></div>
-                    <div class="menu-item" tabindex="0" role="button" aria-label="Projetos"><span>Projects</span><span>03</span></div>
-                    <div class="menu-item" tabindex="0" role="button" aria-label="Contato"><span>Contact</span><span>04</span></div>
+                    <div class="menu-item active" tabindex="0" role="button" data-target="profile" aria-label="Perfil"><span>Profile</span><span>01</span></div>
+                    <div class="menu-item" tabindex="0" role="button" data-target="skills" aria-label="Habilidades"><span>Skills</span><span>02</span></div>
+                    <div class="menu-item" tabindex="0" role="button" data-target="projects" aria-label="Projetos"><span>Projects</span><span>03</span></div>
+                    <div class="menu-item" tabindex="0" role="button" data-target="contact" aria-label="Contato"><span>Contact</span><span>04</span></div>
                 </div>
 
                 <div class="info-box">
@@ -732,98 +768,154 @@
 
             <main class="content">
                 <div class="content-panel">
-                    <div class="topbar-mini">
-                        <strong>Profile</strong>
-                        <span>Investigator / Creator</span>
-                    </div>
+                    <section class="page-section" data-section="profile" id="profileSection">
+                        <div class="topbar-mini">
+                            <strong>Profile</strong>
+                            <span>Investigator / Creator</span>
+                        </div>
 
-                    <div class="hero-box">
-                        <img class="avatar" src="calmacalabreso.jfif" alt="Naiko" />
-                        <div class="hero-copy">
-                            <h1>Eu sou <span class="accent-word">Naiko</span>,<br /> e essa é a minha jornada.</h1>
-                            <p>
-                                Transformo ideias em experiências visuais com identidade, narrativa e personalidade.
-                                Gosto de misturar design, desenvolvimento e emoção para criar projetos que se distinguem.
-                            </p>
+                        <div class="hero-box">
+                            <img class="avatar" src="calmacalabreso.jfif" alt="Naiko" />
+                            <div class="hero-copy">
+                                <h1>Eu sou <span class="accent-word">Naiko</span>,<br /> e essa é a minha jornada.</h1>
+                                <p>
+                                    Transformo ideias em experiências visuais com identidade, narrativa e personalidade.
+                                    Gosto de misturar design, desenvolvimento e emoção para criar projetos que se distinguem.
+                                </p>
 
-                            <div class="quick-actions">
-                                <a class="action primary" href="#projetos">Ver projetos</a>
-                                <a class="action" href="#contato">Contato</a>
+                                <div class="quick-actions">
+                                    <button class="action primary" type="button" data-target="projects">Ver projetos</button>
+                                    <button class="action" type="button" data-target="contact">Contato</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <strong>2+</strong>
-                            <span>Anos de estudo</span>
-                        </div>
-                        <div class="stat-card">
-                            <strong>6+</strong>
-                            <span>Projetos</span>
-                        </div>
-                        <div class="stat-card">
-                            <strong>∞</strong>
-                            <span>Ideias</span>
-                        </div>
-                    </div>
-
-                    <div class="music-panel">
-                        <div class="music-row">
-                            <div class="music-label">Música</div>
-                            <div class="music-controls">
-                                <button class="music-btn primary" id="musicToggleBtn" type="button">Tocar</button>
-                                <button class="music-btn" id="musicSelectBtn" type="button">Escolher música</button>
-                                <input class="music-file" id="musicInput" type="file" accept="audio/*" />
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <strong>2+</strong>
+                                <span>Anos de estudo</span>
+                            </div>
+                            <div class="stat-card">
+                                <strong>6+</strong>
+                                <span>Projetos</span>
+                            </div>
+                            <div class="stat-card">
+                                <strong>∞</strong>
+                                <span>Ideias</span>
                             </div>
                         </div>
-                        <div class="music-name" id="musicName">Nenhuma música selecionada</div>
-                    </div>
 
-                    <div class="lower-grid">
-                        <div class="subpanel" id="projetos">
-                            <h3>Projects</h3>
-                            <div class="project-list">
-                                <div class="project-item">
-                                    <strong>Portfólio pessoal</strong>
-                                    <p>Interface narrada em clima de cidade noturna com visual marcante e identidade pessoal.</p>
-                                    <div class="tag-row">
-                                        <span class="tag">HTML</span>
-                                        <span class="tag">CSS</span>
-                                        <span class="tag">Design</span>
+                        <div class="music-panel">
+                            <div class="music-row">
+                                <div class="music-label">Música</div>
+                                <div class="music-controls">
+                                    <button class="music-btn primary" id="musicToggleBtn" type="button">Tocar</button>
+                                    <button class="music-btn" id="musicSelectBtn" type="button">Escolher música</button>
+                                    <input class="music-file" id="musicInput" type="file" accept="audio/*" />
+                                </div>
+                            </div>
+                            <div class="music-name" id="musicName">Nenhuma música selecionada</div>
+                        </div>
+                    </section>
+
+                    <section class="page-section hidden" data-section="skills" id="skillsSection">
+                        <div class="topbar-mini">
+                            <strong>Skills</strong>
+                            <span>Abilities / Focus</span>
+                        </div>
+
+                        <div class="skills-grid">
+                            <div class="skill-row"><span>Design visual</span><span>Alta</span></div>
+                            <div class="skill-row"><span>HTML / CSS</span><span>Alta</span></div>
+                            <div class="skill-row"><span>Criação de identidade</span><span>Alta</span></div>
+                            <div class="skill-row"><span>UX / UI</span><span>Média</span></div>
+                            <div class="skill-row"><span>Storytelling visual</span><span>Alta</span></div>
+                        </div>
+                    </section>
+
+                    <section class="page-section hidden" data-section="projects" id="projectsSection">
+                        <div class="topbar-mini">
+                            <strong>Projects</strong>
+                            <span>Works</span>
+                        </div>
+
+                        <div class="section-grid">
+                            <div class="subpanel">
+                                <h3>Portfolio</h3>
+                                <div class="project-list">
+                                    <div class="project-item">
+                                        <strong>Portfólio pessoal</strong>
+                                        <p>Interface narrada em clima de cidade noturna com visual marcante e identidade pessoal.</p>
+                                        <div class="tag-row">
+                                            <span class="tag">HTML</span>
+                                            <span class="tag">CSS</span>
+                                            <span class="tag">Design</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="project-item">
+                                        <strong>Estética de marca</strong>
+                                        <p>Criação de visual com presença, emoção e uma linguagem única para projetos digitais.</p>
+                                        <div class="tag-row">
+                                            <span class="tag">Branding</span>
+                                            <span class="tag">Art</span>
+                                            <span class="tag">Story</span>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="project-item">
-                                    <strong>Estética de marca</strong>
-                                    <p>Criação de visual com presença, emoção e uma linguagem única para projetos digitais.</p>
-                                    <div class="tag-row">
-                                        <span class="tag">Branding</span>
-                                        <span class="tag">Art</span>
-                                        <span class="tag">Story</span>
+                            <div class="subpanel">
+                                <h3>Exploração</h3>
+                                <div class="project-list">
+                                    <div class="project-item">
+                                        <strong>Interfaces criativas</strong>
+                                        <p>Layouts que misturam feeling visual, navegação clara e identidade forte.</p>
+                                        <div class="tag-row">
+                                            <span class="tag">UI</span>
+                                            <span class="tag">UX</span>
+                                            <span class="tag">Prototype</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </section>
 
-                        <div class="subpanel" id="contato">
-                            <h3>Social Links</h3>
-                            <div class="socials">
-                                <div class="social">
-                                    <strong>E-mail</strong>
-                                    <span>naiko@email.com</span>
-                                </div>
-                                <div class="social">
-                                    <strong>GitHub</strong>
-                                    <span>@naikoArroz</span>
-                                </div>
-                                <div class="social">
-                                    <strong>Instagram</strong>
-                                    <span>@naiko.art</span>
+                    <section class="page-section hidden" data-section="contact" id="contactSection">
+                        <div class="topbar-mini">
+                            <strong>Contact</strong>
+                            <span>Reach out</span>
+                        </div>
+
+                        <div class="section-grid">
+                            <div class="subpanel">
+                                <h3>Mensagem</h3>
+                                <p style="color: var(--muted); line-height: 1.8; margin: 0;">
+                                    Se quiser conversar sobre design, desenvolvimento, ideias, projetos visuais ou qualquer coisa criativa,
+                                    pode me chamar. Eu gosto de colaborar com quem valoriza personalidade e conceito.
+                                </p>
+                            </div>
+
+                            <div class="subpanel">
+                                <h3>Social Links</h3>
+                                <div class="socials">
+                                    <div class="social">
+                                        <strong>E-mail</strong>
+                                        <span>naiko@email.com</span>
+                                    </div>
+                                    <div class="social">
+                                        <strong>GitHub</strong>
+                                        <span>@naikoArroz</span>
+                                    </div>
+                                    <div class="social">
+                                        <strong>Instagram</strong>
+                                        <span>@naiko.art</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </main>
         </div>
@@ -839,21 +931,35 @@
         const musicToggleBtn = document.getElementById('musicToggleBtn');
         const musicName = document.getElementById('musicName');
 
+        const sections = document.querySelectorAll('.page-section');
         const menuItems = document.querySelectorAll('.menu-item');
+        const menuButtons = document.querySelectorAll('[data-target]');
 
-        function selectMenuItem(item) {
-            menuItems.forEach(el => el.classList.remove('active'));
-            item.classList.add('active');
+        function showSection(targetName) {
+            sections.forEach((section) => {
+                const isVisible = section.dataset.section === targetName;
+                section.classList.toggle('hidden', !isVisible);
+            });
+
+            menuItems.forEach((item) => {
+                item.classList.toggle('active', item.dataset.target === targetName);
+            });
         }
 
         menuItems.forEach((item) => {
-            item.addEventListener('click', () => selectMenuItem(item));
+            item.addEventListener('click', () => showSection(item.dataset.target));
             item.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
-                    selectMenuItem(item);
+                    showSection(item.dataset.target);
                 }
             });
+        });
+
+        menuButtons.forEach((button) => {
+            if (button.classList.contains('action')) {
+                button.addEventListener('click', () => showSection(button.dataset.target));
+            }
         });
 
         setTimeout(() => {
@@ -901,15 +1007,6 @@
 
         audio.addEventListener('pause', () => {
             musicToggleBtn.textContent = 'Tocar';
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (event) => {
-                const target = document.getElementById(anchor.getAttribute('href').substring(1));
-                if (!target) return;
-                event.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
         });
     </script>
 </body>
