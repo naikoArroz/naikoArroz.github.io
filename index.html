@@ -6,12 +6,12 @@
     <title>Naiko Arroz | Persona 4 Menu</title>
     <style>
         :root {
-            --bg-dark: #0a1018;
-            --bg-mid: #121b2e;
-            --bg-panel: rgba(17, 23, 35, 0.9);
-            --bg-panel-alt: rgba(10, 15, 23, 0.96);
+            --bg-dark: #090e16;
+            --bg-mid: #101c2d;
+            --bg-panel: rgba(17, 23, 35, 0.94);
+            --bg-panel-alt: rgba(9, 15, 24, 0.96);
             --panel-line: rgba(255, 214, 92, 0.35);
-            --panel-shadow: rgba(0, 0, 0, 0.5);
+            --panel-shadow: rgba(0, 0, 0, 0.58);
             --icon-yellow: #f7d85e;
             --icon-yellow-2: #ffd857;
             --night-blue: #1a2940;
@@ -19,7 +19,7 @@
             --cyan: #7fe6ff;
             --green: #7ef5c5;
             --text: #f7f5ee;
-            --muted: #d4d0c2;
+            --muted: #d8d1be;
             --label: #f6d67b;
             --danger: #ff8f8f;
         }
@@ -34,7 +34,7 @@
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at top, rgba(247, 216, 94, 0.10), transparent 25%),
+                radial-gradient(circle at top, rgba(247, 216, 94, 0.10), transparent 24%),
                 linear-gradient(180deg, #070d15 0%, #0d1523 40%, #0a111d 100%);
             overflow-x: hidden;
         }
@@ -52,25 +52,39 @@
                     transparent 2px,
                     transparent 4px
                 );
-            opacity: 0.6;
+            opacity: 0.5;
+            z-index: 0;
         }
 
+        a { color: inherit; }
+
         .screen {
+            position: relative;
+            z-index: 1;
             width: min(1180px, calc(100% - 32px));
             margin: 36px auto;
-            position: relative;
             border: 3px solid rgba(255, 214, 92, 0.45);
             background: linear-gradient(180deg, rgba(11, 19, 30, 0.9), rgba(12, 18, 31, 0.96));
             box-shadow:
                 0 0 0 4px rgba(255, 214, 92, 0.06),
-                0 30px 70px rgba(0,0,0,0.6),
+                0 30px 70px rgba(0, 0, 0, 0.6),
                 inset 0 0 24px rgba(255, 214, 92, 0.04);
+            animation: screenGlow 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes screenGlow {
+            from {
+                box-shadow: 0 0 0 4px rgba(255,214,92,0.04), 0 30px 70px rgba(0,0,0,0.6), inset 0 0 20px rgba(255,214,92,0.03);
+            }
+            to {
+                box-shadow: 0 0 0 4px rgba(255,214,92,0.08), 0 34px 82px rgba(0,0,0,0.7), inset 0 0 28px rgba(255,214,92,0.08);
+            }
         }
 
         .screen::before {
             content: "";
             position: absolute;
-            inset: 20px;
+            inset: 18px;
             border: 1px solid rgba(255, 214, 92, 0.26);
             pointer-events: none;
         }
@@ -101,6 +115,12 @@
             border-radius: 50%;
             background: var(--icon-yellow);
             box-shadow: 0 0 14px rgba(247, 216, 94, 0.9);
+            animation: pulseDot 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(0.9); opacity: 0.9; }
+            50% { transform: scale(1.3); opacity: 1; }
         }
 
         .status {
@@ -205,13 +225,48 @@
         .content {
             background: linear-gradient(180deg, rgba(16, 22, 33, 0.9), rgba(10, 16, 26, 0.96));
             padding: 24px 22px 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(255,214,92,0.02),
+                rgba(255,214,92,0.01),
+                rgba(255,214,92,0.02)
+            );
+            pointer-events: none;
         }
 
         .content-panel {
+            position: relative;
+            z-index: 1;
             border: 1px solid rgba(255,214,92,0.18);
             background: rgba(255,255,255,0.015);
             padding: 18px 18px 8px;
             height: 100%;
+            overflow: hidden;
+        }
+
+        .content-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(rgba(255,255,255,0.02), transparent 20%),
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,0.04),
+                    rgba(255,255,255,0.04) 1px,
+                    transparent 2px,
+                    transparent 6px
+                );
+            opacity: 0.55;
+            pointer-events: none;
         }
 
         .topbar-mini {
@@ -252,6 +307,17 @@
             border-radius: 18px;
             box-shadow: 0 12px 24px rgba(0,0,0,0.35);
             background: linear-gradient(135deg, rgba(247,216,94,0.18), rgba(127,230,255,0.10));
+            animation: floatPortrait 3.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatPortrait {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-6px); }
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-copy h1 {
@@ -259,6 +325,12 @@
             font-size: clamp(2rem, 4vw, 4rem);
             letter-spacing: -0.07em;
             line-height: 0.95;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .accent-word {
@@ -319,6 +391,15 @@
             padding: 14px 16px;
             border: 1px solid rgba(255,214,92,0.18);
             background: rgba(255,255,255,0.02);
+            animation: signalIn 0.9s ease both;
+        }
+
+        .stat-card:nth-child(2) { animation-delay: 0.1s; }
+        .stat-card:nth-child(3) { animation-delay: 0.2s; }
+
+        @keyframes signalIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .stat-card strong {
@@ -424,6 +505,156 @@
             font-size: 0.82rem;
         }
 
+        .music-panel {
+            margin-top: 18px;
+            padding: 12px 14px;
+            border: 1px solid rgba(255,214,92,0.2);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .music-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-label {
+            color: var(--label);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.7rem;
+            min-width: 110px;
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .music-btn {
+            border: 1px solid rgba(255,214,92,0.25);
+            background: rgba(255,255,255,0.02);
+            color: var(--text);
+            padding: 8px 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.68rem;
+            cursor: pointer;
+        }
+
+        .music-btn.primary {
+            background: linear-gradient(135deg, var(--icon-yellow), #f5d76f);
+            color: #171400;
+            border-color: rgba(247,216,94,0.8);
+        }
+
+        .music-file {
+            display: none;
+        }
+
+        .music-name {
+            color: var(--muted);
+            font-size: 0.8rem;
+            min-height: 1.2em;
+        }
+
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at center, rgba(247,216,94,0.08), rgba(7,13,21,0.96) 52%, rgba(4,8,14,1));
+            z-index: 999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            overflow: hidden;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loading-screen::before,
+        .loading-screen::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .loading-screen::before {
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,0.035),
+                    rgba(255,255,255,0.035) 1px,
+                    transparent 2px,
+                    transparent 6px
+                );
+            opacity: 0.5;
+        }
+
+        .loading-screen::after {
+            background: linear-gradient(90deg, transparent 0%, rgba(247,216,94,0.14) 50%, transparent 100%);
+            animation: sweep 1.3s ease-in-out infinite alternate;
+        }
+
+        @keyframes sweep {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+
+        .loading-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--icon-yellow);
+            text-shadow: 0 0 18px rgba(247,216,94,0.8);
+            animation: flicker 1.5s linear infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        .loading-title {
+            font-size: clamp(1.5rem, 3vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .loading-bar {
+            width: min(360px, 70vw);
+            height: 12px;
+            border: 1px solid rgba(255,214,92,0.3);
+            background: rgba(255,255,255,0.02);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 40%;
+            background: linear-gradient(90deg, var(--icon-yellow), #f7efc5);
+            box-shadow: 0 0 18px rgba(247,216,94,0.8);
+            animation: loadBar 2.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes loadBar {
+            0% { width: 12%; }
+            100% { width: 100%; }
+        }
+
         @media (max-width: 940px) {
             .menu-shell {
                 grid-template-columns: 1fr;
@@ -463,6 +694,13 @@
     </style>
 </head>
 <body>
+    <div class="loading-screen" id="loadingScreen" aria-live="polite">
+        <div class="loading-content">
+            <div class="loading-title">Now Loading...</div>
+            <div class="loading-bar"><div class="loading-progress"></div></div>
+        </div>
+    </div>
+
     <div class="screen">
         <div class="screen-header">
             <div class="header-label">Persona 4 / Portfolio Interface</div>
@@ -527,6 +765,18 @@
                         </div>
                     </div>
 
+                    <div class="music-panel">
+                        <div class="music-row">
+                            <div class="music-label">Música</div>
+                            <div class="music-controls">
+                                <button class="music-btn primary" id="musicToggleBtn" type="button">Tocar</button>
+                                <button class="music-btn" id="musicSelectBtn" type="button">Escolher música</button>
+                                <input class="music-file" id="musicInput" type="file" accept="audio/*" />
+                            </div>
+                        </div>
+                        <div class="music-name" id="musicName">Nenhuma música selecionada</div>
+                    </div>
+
                     <div class="lower-grid">
                         <div class="subpanel" id="projetos">
                             <h3>Projects</h3>
@@ -575,5 +825,67 @@
             </main>
         </div>
     </div>
+
+    <audio id="bgMusic" loop></audio>
+
+    <script>
+        const loadingScreen = document.getElementById('loadingScreen');
+        const audio = document.getElementById('bgMusic');
+        const musicInput = document.getElementById('musicInput');
+        const musicSelectBtn = document.getElementById('musicSelectBtn');
+        const musicToggleBtn = document.getElementById('musicToggleBtn');
+        const musicName = document.getElementById('musicName');
+
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                menuItems.forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 2200);
+
+        musicSelectBtn.addEventListener('click', () => musicInput.click());
+
+        musicInput.addEventListener('change', (event) => {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            const objectUrl = URL.createObjectURL(file);
+            audio.src = objectUrl;
+            musicName.textContent = file.name;
+
+            if (!audio.paused) {
+                audio.play();
+            }
+        });
+
+        musicToggleBtn.addEventListener('click', () => {
+            if (!audio.src) {
+                musicName.textContent = 'Escolha uma música primeiro';
+                musicInput.click();
+                return;
+            }
+
+            if (audio.paused) {
+                audio.play();
+                musicToggleBtn.textContent = 'Pausar';
+            } else {
+                audio.pause();
+                musicToggleBtn.textContent = 'Tocar';
+            }
+        });
+
+        audio.addEventListener('play', () => {
+            musicToggleBtn.textContent = 'Pausar';
+        });
+
+        audio.addEventListener('pause', () => {
+            musicToggleBtn.textContent = 'Tocar';
+        });
+    </script>
 </body>
 </html>
