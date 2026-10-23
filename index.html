@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Naiko Arroz | Midnight Portfolio</title>
+    <title>Naiko Arroz | Persona 4 Menu</title>
     <style>
         :root {
-            --bg-1: #0c1220;
-            --bg-2: #171d2f;
-            --bg-3: #080d19;
-            --panel: rgba(11, 17, 30, 0.82);
-            --panel-strong: rgba(18, 23, 35, 0.95);
-            --screen: #f4d35e;
-            --screen-2: #ffd75a;
-            --ink: #121212;
-            --text: #f6f5ef;
-            --muted: #d7d3c7;
-            --line: rgba(255, 214, 92, 0.45);
-            --glow: rgba(255, 212, 73, 0.9);
-            --cyan: #77e7ff;
-            --cyan-soft: rgba(119, 231, 255, 0.12);
-            --green: #a1ffd6;
-            --shadow: rgba(0, 0, 0, 0.6);
+            --bg-dark: #0a1018;
+            --bg-mid: #121b2e;
+            --bg-panel: rgba(17, 23, 35, 0.9);
+            --bg-panel-alt: rgba(10, 15, 23, 0.96);
+            --panel-line: rgba(255, 214, 92, 0.35);
+            --panel-shadow: rgba(0, 0, 0, 0.5);
+            --icon-yellow: #f7d85e;
+            --icon-yellow-2: #ffd857;
+            --night-blue: #1a2940;
+            --night-blue-2: #151f30;
+            --cyan: #7fe6ff;
+            --green: #7ef5c5;
+            --text: #f7f5ee;
+            --muted: #d4d0c2;
+            --label: #f6d67b;
+            --danger: #ff8f8f;
         }
 
         * { box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             margin: 0;
@@ -36,8 +34,8 @@
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at top, rgba(255, 214, 92, 0.14), transparent 30%),
-                linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 35%, var(--bg-3) 100%);
+                radial-gradient(circle at top, rgba(247, 216, 94, 0.10), transparent 25%),
+                linear-gradient(180deg, #070d15 0%, #0d1523 40%, #0a111d 100%);
             overflow-x: hidden;
         }
 
@@ -46,679 +44,536 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            background: repeating-linear-gradient(
-                to bottom,
-                rgba(255,255,255,0.04),
-                rgba(255,255,255,0.04) 1px,
-                transparent 2px,
-                transparent 4px
-            );
-            opacity: 0.45;
-            mix-blend-mode: screen;
-        }
-
-        .container {
-            width: min(1100px, calc(100% - 30px));
-            margin: 0 auto;
-        }
-
-        .topbar {
-            position: sticky;
-            top: 0;
-            z-index: 30;
-            background: rgba(9, 12, 19, 0.68);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 214, 92, 0.22);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            min-height: 76px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 900;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--screen-2);
-            text-shadow: 0 0 18px rgba(255, 214, 92, 0.7);
-        }
-
-        .brand-mark {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--screen-2), #fff7c2);
-            box-shadow: 0 0 18px rgba(255, 214, 92, 0.9);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: var(--muted);
-            text-decoration: none;
-            font-weight: 600;
-            position: relative;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 100%;
-            height: 2px;
-            background: var(--screen-2);
-            transform: scaleX(0);
-            transform-origin: center;
-            transition: transform 0.2s ease;
-            box-shadow: 0 0 12px rgba(255, 214, 92, 0.7);
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-        }
-
-        .nav-links a:hover::after {
-            transform: scaleX(1);
-        }
-
-        .hero {
-            padding: 56px 0 32px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.25fr 0.75fr;
-            gap: 28px;
-            align-items: center;
-        }
-
-        .eyebrow {
-            display: inline-block;
-            border: 1px solid var(--line);
-            color: var(--screen-2);
-            background: rgba(255, 214, 92, 0.08);
-            padding: 9px 14px;
-            border-radius: 999px;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            font-size: 0.72rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            box-shadow: 0 0 18px rgba(255, 214, 92, 0.14);
-        }
-
-        h1 {
-            margin: 0 0 18px;
-            font-size: clamp(2.8rem, 6vw, 5.2rem);
-            line-height: 0.96;
-            letter-spacing: -0.08em;
-        }
-
-        .accent {
-            display: inline-block;
-            color: var(--screen-2);
-            text-shadow: 0 0 18px rgba(255, 214, 92, 0.7);
-        }
-
-        .lead {
-            max-width: 620px;
-            color: var(--muted);
-            font-size: 1.12rem;
-            line-height: 1.9;
-            margin: 0 0 28px;
-        }
-
-        .cta-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-bottom: 26px;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 22px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 800;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-        }
-
-        .button.primary {
-            background: linear-gradient(135deg, var(--screen), #f7d95e);
-            color: #1a1800;
-            box-shadow: 0 12px 28px rgba(255, 214, 92, 0.38);
-        }
-
-        .button.secondary {
-            color: var(--text);
-            border: 1px solid var(--line);
-            background: rgba(255,255,255,0.02);
-        }
-
-        .stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            color: var(--muted);
-        }
-
-        .stat {
-            min-width: 120px;
-            padding: 14px 18px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--line);
-            box-shadow: inset 0 0 18px rgba(255, 214, 92, 0.04);
-        }
-
-        .stat strong {
-            display: block;
-            color: var(--screen-2);
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-        }
-
-        .screen-card {
-            position: relative;
-            background: linear-gradient(180deg, rgba(18, 24, 36, 0.9), rgba(9, 14, 22, 0.95));
-            border: 2px solid rgba(255, 214, 92, 0.38);
-            border-radius: 28px;
-            padding: 18px;
-            box-shadow:
-                0 0 0 3px rgba(255,214,92,0.08),
-                0 26px 60px rgba(0,0,0,0.56),
-                0 0 30px rgba(255,214,92,0.12);
-        }
-
-        .screen-card::before {
-            content: "";
-            position: absolute;
-            inset: 14px;
-            border: 1px solid rgba(255, 214, 92, 0.3);
-            border-radius: 18px;
-            pointer-events: none;
-        }
-
-        .tv-face {
-            position: relative;
-            overflow: hidden;
-            border-radius: 24px;
             background:
-                linear-gradient(180deg, rgba(255, 214, 92, 0.08), rgba(255, 214, 92, 0.02)),
-                linear-gradient(135deg, rgba(21, 27, 38, 0.9), rgba(12, 16, 24, 1));
-            border: 1px solid rgba(255, 214, 92, 0.20);
-            padding: 20px;
-            min-height: 440px;
-        }
-
-        .tv-face::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(rgba(255,255,255,0.06), transparent 20%),
                 repeating-linear-gradient(
                     to bottom,
                     rgba(255,255,255,0.04),
-                    rgba(255,255,255,0.04) 2px,
+                    rgba(255,255,255,0.04) 1px,
                     transparent 2px,
-                    transparent 6px
+                    transparent 4px
                 );
+            opacity: 0.6;
+        }
+
+        .screen {
+            width: min(1180px, calc(100% - 32px));
+            margin: 36px auto;
+            position: relative;
+            border: 3px solid rgba(255, 214, 92, 0.45);
+            background: linear-gradient(180deg, rgba(11, 19, 30, 0.9), rgba(12, 18, 31, 0.96));
+            box-shadow:
+                0 0 0 4px rgba(255, 214, 92, 0.06),
+                0 30px 70px rgba(0,0,0,0.6),
+                inset 0 0 24px rgba(255, 214, 92, 0.04);
+        }
+
+        .screen::before {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px solid rgba(255, 214, 92, 0.26);
             pointer-events: none;
         }
 
-        .portrait-wrap {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            place-items: center;
-            margin-bottom: 16px;
-        }
-
-        .portrait {
-            width: min(285px, 100%);
-            aspect-ratio: 1;
-            object-fit: cover;
-            border-radius: 26px;
-            border: 2px solid rgba(255, 214, 92, 0.35);
-            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.46);
-            background: linear-gradient(135deg, rgba(255,214,92,0.12), rgba(119,231,255,0.08));
-        }
-
-        .live-badge {
-            position: absolute;
-            right: 18px;
-            bottom: 18px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(14, 20, 28, 0.9);
-            border: 1px solid rgba(255, 214, 92, 0.35);
-            color: var(--screen-2);
-            border-radius: 999px;
-            padding: 8px 12px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-size: 0.68rem;
-            font-weight: 700;
-            z-index: 1;
-        }
-
-        .live-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--screen-2);
-            box-shadow: 0 0 18px rgba(255, 214, 92, 0.9);
-        }
-
-        .tv-info {
-            position: relative;
-            z-index: 1;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,214,92,0.18);
-            border-radius: 18px;
-            padding: 14px 16px;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        .tv-info strong {
-            color: var(--screen-2);
-        }
-
-        .section {
-            padding: 34px 0 18px;
-        }
-
-        .section-header {
+        .screen-header {
             display: flex;
-            align-items: flex-end;
             justify-content: space-between;
-            gap: 14px;
-            margin-bottom: 20px;
-        }
-
-        .section-header h2 {
-            margin: 0;
-            font-size: clamp(2rem, 3vw, 2.8rem);
-            letter-spacing: -0.06em;
-        }
-
-        .section-header span {
-            color: var(--screen-2);
+            align-items: center;
+            gap: 12px;
+            padding: 18px 26px 10px;
+            border-bottom: 1px solid rgba(255, 214, 92, 0.18);
             text-transform: uppercase;
-            letter-spacing: 0.18em;
-            font-size: 0.72rem;
-            font-weight: 700;
+            letter-spacing: 0.16em;
+            font-size: 0.7rem;
+            color: var(--label);
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 22px;
+        .header-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .panel {
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.28);
-            position: relative;
-        }
-
-        .panel::before {
+        .header-label::before {
             content: "";
-            position: absolute;
-            inset: 0 auto auto 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--screen-2), var(--cyan), var(--green));
-            border-radius: 24px 24px 0 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--icon-yellow);
+            box-shadow: 0 0 14px rgba(247, 216, 94, 0.9);
         }
 
-        .panel p {
-            margin: 0;
+        .status {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
             color: var(--muted);
-            line-height: 1.85;
-            font-size: 1.04rem;
         }
 
-        .skills {
+        .status span {
+            padding: 6px 10px;
+            border: 1px solid rgba(255, 214, 92, 0.18);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .menu-shell {
             display: grid;
-            gap: 14px;
+            grid-template-columns: 280px 1fr;
+            min-height: 760px;
         }
 
-        .skill-item {
+        .sidebar {
+            padding: 22px 18px 16px;
+            border-right: 1px solid rgba(255, 214, 92, 0.18);
+            background: linear-gradient(180deg, rgba(10, 17, 27, 0.75), rgba(14, 23, 35, 0.95));
+        }
+
+        .sidebar-title {
+            margin: 0 0 18px;
+            color: var(--label);
+            font-size: 0.75rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .menu-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .menu-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            padding: 14px 16px;
-            border-radius: 14px;
+            padding: 16px 14px;
             background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,214,92,0.18);
-        }
-
-        .skill-item span:last-child {
-            color: var(--screen-2);
+            border: 1px solid rgba(255, 214, 92, 0.18);
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
             font-weight: 700;
-        }
-
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
-        }
-
-        .project-card {
             position: relative;
-            overflow: hidden;
-            background: linear-gradient(180deg, rgba(17, 23, 34, 0.96), rgba(9, 14, 22, 0.9));
-            border: 1px solid rgba(255,214,92,0.2);
-            border-radius: 22px;
-            padding: 20px;
-            box-shadow: inset 0 0 22px rgba(255, 214, 92, 0.04);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
         }
 
-        .project-card::before {
+        .menu-item::before {
             content: "";
-            position: absolute;
-            inset: 0 auto auto 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--screen-2), var(--cyan), var(--green));
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--icon-yellow);
+            box-shadow: 0 0 14px rgba(247, 216, 94, 0.8);
         }
 
-        .project-tag {
-            display: inline-block;
-            background: rgba(255,214,92,0.08);
-            border: 1px solid rgba(255,214,92,0.22);
-            color: var(--screen-2);
-            border-radius: 999px;
-            padding: 7px 11px;
+        .menu-item.active,
+        .menu-item:hover {
+            transform: translateX(4px);
+            border-color: rgba(247, 216, 94, 0.5);
+            box-shadow: inset 0 0 18px rgba(247, 216, 94, 0.06);
+        }
+
+        .menu-item span:last-child {
+            color: var(--icon-yellow);
+            font-size: 0.72rem;
+        }
+
+        .info-box {
+            margin-top: 28px;
+            padding: 14px 12px;
+            border: 1px solid rgba(255,214,92,0.18);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--icon-yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
             font-size: 0.7rem;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+
+        .content {
+            background: linear-gradient(180deg, rgba(16, 22, 33, 0.9), rgba(10, 16, 26, 0.96));
+            padding: 24px 22px 18px;
+        }
+
+        .content-panel {
+            border: 1px solid rgba(255,214,92,0.18);
+            background: rgba(255,255,255,0.015);
+            padding: 18px 18px 8px;
+            height: 100%;
+        }
+
+        .topbar-mini {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,214,92,0.18);
+        }
+
+        .topbar-mini strong {
+            color: var(--label);
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            margin-bottom: 14px;
+            font-size: 0.72rem;
         }
 
-        .project-card h3 {
+        .topbar-mini span {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .hero-box {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 24px;
+            align-items: center;
+            margin-top: 18px;
+            padding: 18px 10px 14px;
+        }
+
+        .avatar {
+            width: 190px;
+            height: 190px;
+            object-fit: cover;
+            border: 2px solid rgba(255,214,92,0.35);
+            border-radius: 18px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+            background: linear-gradient(135deg, rgba(247,216,94,0.18), rgba(127,230,255,0.10));
+        }
+
+        .hero-copy h1 {
             margin: 0 0 10px;
-            font-size: 1.4rem;
+            font-size: clamp(2rem, 4vw, 4rem);
+            letter-spacing: -0.07em;
+            line-height: 0.95;
         }
 
-        .project-card p {
-            margin: 0 0 18px;
+        .accent-word {
+            color: var(--icon-yellow);
+            text-shadow: 0 0 18px rgba(247, 216, 94, 0.8);
+        }
+
+        .hero-copy p {
+            margin: 0;
             color: var(--muted);
             line-height: 1.8;
+            font-size: 1.02rem;
+            max-width: 620px;
         }
 
-        .project-meta {
+        .quick-actions {
+            margin-top: 22px;
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 12px;
         }
 
-        .chip {
+        .action {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 7px 10px;
-            border-radius: 999px;
-            font-size: 0.72rem;
-            background: rgba(119,231,255,0.08);
-            border: 1px solid rgba(119,231,255,0.2);
-            color: var(--cyan);
-            font-weight: 600;
+            padding: 12px 16px;
+            border: 1px solid rgba(255,214,92,0.25);
+            background: rgba(255,255,255,0.02);
+            color: var(--text);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .contact {
+        .action.primary {
+            background: linear-gradient(135deg, var(--icon-yellow), #f5d76f);
+            color: #1a1702;
+            border-color: rgba(247,216,94,0.8);
+            box-shadow: 0 12px 24px rgba(247,216,94,0.18);
+        }
+
+        .action:hover {
+            transform: translateY(-2px);
+        }
+
+        .stats-grid {
+            margin-top: 18px;
             display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 22px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .stat-card {
+            padding: 14px 16px;
+            border: 1px solid rgba(255,214,92,0.18);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .stat-card strong {
+            display: block;
+            color: var(--icon-yellow);
+            font-size: 1.7rem;
+            margin-bottom: 6px;
+        }
+
+        .stat-card span {
+            color: var(--muted);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .lower-grid {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 18px;
+        }
+
+        .subpanel {
+            border: 1px solid rgba(255,214,92,0.18);
+            background: rgba(255,255,255,0.02);
+            padding: 16px;
+        }
+
+        .subpanel h3 {
+            margin: 0 0 12px;
+            color: var(--label);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+        }
+
+        .project-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .project-item {
+            border: 1px solid rgba(255,214,92,0.15);
+            background: rgba(255,255,255,0.018);
+            padding: 12px 12px 10px;
+        }
+
+        .project-item strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text);
+            font-size: 1.04rem;
+        }
+
+        .project-item p {
+            margin: 0 0 10px;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 999px;
+            background: rgba(127,230,255,0.08);
+            border: 1px solid rgba(127,230,255,0.2);
+            color: var(--cyan);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
 
         .socials {
             display: grid;
-            gap: 12px;
+            gap: 10px;
         }
 
         .social {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             gap: 10px;
-            padding: 14px 16px;
-            border-radius: 14px;
-            background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,214,92,0.18);
+            background: rgba(255,255,255,0.018);
+            padding: 10px 12px;
         }
 
         .social strong {
             color: var(--text);
+            font-size: 0.95rem;
         }
 
         .social span {
             color: var(--muted);
+            font-size: 0.82rem;
         }
 
-        .footer {
-            padding: 28px 0 52px;
-            text-align: center;
-            color: var(--muted);
-        }
-
-        @media (max-width: 900px) {
-            .hero-grid,
-            .about-grid,
-            .contact,
-            .projects {
+        @media (max-width: 940px) {
+            .menu-shell {
                 grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,214,92,0.18);
+            }
+
+            .lower-grid,
+            .stats-grid,
+            .hero-box {
+                grid-template-columns: 1fr;
+            }
+
+            .avatar {
+                width: 160px;
+                height: 160px;
             }
         }
 
         @media (max-width: 560px) {
-            .nav {
-                flex-direction: column;
-                justify-content: center;
-                gap: 10px;
-                padding: 14px 0;
-            }
-
-            .nav-links {
-                justify-content: center;
-            }
-
-            .section-header {
+            .screen-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
-            .hero {
-                padding-top: 32px;
+            .status {
+                width: 100%;
+            }
+
+            .menu-item {
+                padding: 14px 12px;
             }
         }
     </style>
 </head>
 <body>
-    <header class="topbar">
-        <div class="container nav">
-            <div class="brand">
-                <span class="brand-mark"></span>
-                <span>Naiko</span>
+    <div class="screen">
+        <div class="screen-header">
+            <div class="header-label">Persona 4 / Portfolio Interface</div>
+            <div class="status">
+                <span>USER: Naiko</span>
+                <span>MODE: Online</span>
+                <span>AREA: Midnight</span>
             </div>
-            <nav class="nav-links" aria-label="Navegação principal">
-                <a href="#sobre">Sobre</a>
-                <a href="#habilidades">Habilidades</a>
-                <a href="#projetos">Projetos</a>
-                <a href="#contato">Contato</a>
-            </nav>
         </div>
-    </header>
 
-    <main class="container">
-        <section class="hero">
-            <div class="hero-grid">
-                <div>
-                    <div class="eyebrow">Now Loading...</div>
-                    <h1>
-                        Eu sou <span class="accent">Naiko</span>,<br />
-                        e essa é a minha história em tela.
-                    </h1>
-                    <p class="lead">
-                        Crio experiências visuais com personalidade, energia e narrativas fortes. Gosto de unir estética, desenvolvimento e sentimento em um só projeto, como uma cena que prende a atenção e não sai da cabeça.
-                    </p>
-                    <div class="cta-row">
-                        <a class="button primary" href="#projetos">Ver projetos</a>
-                        <a class="button secondary" href="#contato">Falar comigo</a>
+        <div class="menu-shell">
+            <aside class="sidebar">
+                <h2 class="sidebar-title">Main Menu</h2>
+                <div class="menu-list">
+                    <div class="menu-item active"><span>Profile</span><span>01</span></div>
+                    <div class="menu-item"><span>Skills</span><span>02</span></div>
+                    <div class="menu-item"><span>Projects</span><span>03</span></div>
+                    <div class="menu-item"><span>Contact</span><span>04</span></div>
+                </div>
+
+                <div class="info-box">
+                    <strong>Social Link</strong>
+                    <p>Crio experiências com identidade forte, conceito e um toque de mistério.</p>
+                </div>
+            </aside>
+
+            <main class="content">
+                <div class="content-panel">
+                    <div class="topbar-mini">
+                        <strong>Profile</strong>
+                        <span>Investigator / Creator</span>
                     </div>
-                    <div class="stats">
-                        <div class="stat">
+
+                    <div class="hero-box">
+                        <img class="avatar" src="calmacalabreso.jfif" alt="Naiko" />
+                        <div class="hero-copy">
+                            <h1>Eu sou <span class="accent-word">Naiko</span>,<br /> e essa é a minha jornada.</h1>
+                            <p>
+                                Transformo ideias em experiências visuais com identidade, narrativa e personalidade.
+                                Gosto de misturar design, desenvolvimento e emoção para criar projetos que se distinguem.
+                            </p>
+
+                            <div class="quick-actions">
+                                <a class="action primary" href="#projetos">Ver projetos</a>
+                                <a class="action" href="#contato">Contato</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
                             <strong>2+</strong>
-                            anos de estudo
+                            <span>Anos de estudo</span>
                         </div>
-                        <div class="stat">
+                        <div class="stat-card">
                             <strong>6+</strong>
-                            projetos
+                            <span>Projetos</span>
                         </div>
-                        <div class="stat">
+                        <div class="stat-card">
                             <strong>∞</strong>
-                            ideias
+                            <span>Ideias</span>
+                        </div>
+                    </div>
+
+                    <div class="lower-grid">
+                        <div class="subpanel" id="projetos">
+                            <h3>Projects</h3>
+                            <div class="project-list">
+                                <div class="project-item">
+                                    <strong>Portfólio pessoal</strong>
+                                    <p>Interface narrada em clima de cidade noturna com visual marcante e identidade pessoal.</p>
+                                    <div class="tag-row">
+                                        <span class="tag">HTML</span>
+                                        <span class="tag">CSS</span>
+                                        <span class="tag">Design</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-item">
+                                    <strong>Estética de marca</strong>
+                                    <p>Criação de visual com presença, emoção e uma linguagem única para projetos digitais.</p>
+                                    <div class="tag-row">
+                                        <span class="tag">Branding</span>
+                                        <span class="tag">Art</span>
+                                        <span class="tag">Story</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="subpanel" id="contato">
+                            <h3>Social Links</h3>
+                            <div class="socials">
+                                <div class="social">
+                                    <strong>E-mail</strong>
+                                    <span>naiko@email.com</span>
+                                </div>
+                                <div class="social">
+                                    <strong>GitHub</strong>
+                                    <span>@naikoArroz</span>
+                                </div>
+                                <div class="social">
+                                    <strong>Instagram</strong>
+                                    <span>@naiko.art</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <aside class="screen-card" aria-label="Perfil e identidade visual">
-                    <div class="tv-face">
-                        <div class="portrait-wrap">
-                            <img class="portrait" src="calmacalabreso.jfif" alt="Naiko em estilo retrato" />
-                        </div>
-                        <div class="live-badge"><span class="live-dot"></span> Live</div>
-                        <div class="tv-info">
-                            <strong>Protagonista da própria jornada.</strong><br />
-                            Design, web e criatividade em ritmo de cidade noturna.
-                        </div>
-                    </div>
-                </aside>
-            </div>
-        </section>
-
-        <section id="sobre" class="section">
-            <div class="section-header">
-                <h2>Sobre mim</h2>
-                <span>Profile</span>
-            </div>
-            <div class="about-grid">
-                <div class="panel">
-                    <p>
-                        Meu nome é Naiko e eu gosto de transformar ideias em experiências que têm cara própria. Sou movido por estética, identidade visual e uma certa energia de mistério que me acompanha em tudo que faço. O que me chama atenção é criar algo que tenha personalidade forte, funcionalidade real e uma presença marcante.
-                    </p>
-                </div>
-                <div class="panel" id="habilidades">
-                    <div class="skills">
-                        <div class="skill-item"><span>Design visual</span><span>Alta</span></div>
-                        <div class="skill-item"><span>HTML / CSS</span><span>Alta</span></div>
-                        <div class="skill-item"><span>Criação de marca</span><span>Alta</span></div>
-                        <div class="skill-item"><span>UI/UX</span><span>Média</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projetos" class="section">
-            <div class="section-header">
-                <h2>Projetos</h2>
-                <span>Works</span>
-            </div>
-            <div class="projects">
-                <article class="project-card">
-                    <div class="project-tag">Web</div>
-                    <h3>Portfólio</h3>
-                    <p>Uma página pessoal com presença visual forte, narrativa envolvente e identidade marcante no estilo de cidade noturna.</p>
-                    <div class="project-meta">
-                        <span class="chip">HTML</span>
-                        <span class="chip">CSS</span>
-                        <span class="chip">Visual</span>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-tag">Brand</div>
-                    <h3>Estética de marca</h3>
-                    <p>Criação visual com sensação de mistério, energia e personalidade, pensada para dar cara e presença ao projeto.</p>
-                    <div class="project-meta">
-                        <span class="chip">Branding</span>
-                        <span class="chip">Art</span>
-                        <span class="chip">Story</span>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-tag">UI</div>
-                    <h3>Interfaces criativas</h3>
-                    <p>Exploração de layouts com sensação de TV, neon, movimento e personalidade, sem perder a usabilidade.</p>
-                    <div class="project-meta">
-                        <span class="chip">UX</span>
-                        <span class="chip">UI</span>
-                        <span class="chip">Prototype</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section id="contato" class="section">
-            <div class="section-header">
-                <h2>Contato</h2>
-                <span>Reach out</span>
-            </div>
-            <div class="contact">
-                <div class="panel">
-                    <p>
-                        Se quiser conversar sobre design, desenvolvimento, ideias, projetos visuais ou qualquer coisa criativa, pode me chamar. Eu gosto de colaborar com quem valoriza personalidade e conceito.
-                    </p>
-                </div>
-                <div class="panel socials">
-                    <div class="social">
-                        <strong>E-mail</strong>
-                        <span>naiko@email.com</span>
-                    </div>
-                    <div class="social">
-                        <strong>GitHub</strong>
-                        <span>@naikoArroz</span>
-                    </div>
-                    <div class="social">
-                        <strong>Instagram</strong>
-                        <span>@naiko.art</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer container">
-        © 2026 Naiko Arroz — feito com a energia de uma noite iluminada.
-    </footer>
+            </main>
+        </div>
+    </div>
 </body>
 </html>
