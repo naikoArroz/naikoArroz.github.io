@@ -1,11 +1,625 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>NaikoArroz </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naiko Arroz | Portfolio</title>
+    <style>
+        :root {
+            --bg-1: #071421;
+            --bg-2: #0d1d2d;
+            --panel: rgba(12, 26, 35, 0.82);
+            --panel-strong: rgba(15, 29, 40, 0.96);
+            --line: rgba(114, 181, 197, 0.38);
+            --text: #eaf6ff;
+            --muted: #a9c6d3;
+            --accent: #7ad6ff;
+            --accent-2: #92f7d0;
+            --highlight: #ffd76e;
+            --danger: #ff7e8d;
+            --shadow: rgba(3, 11, 17, 0.7);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top, rgba(122, 214, 255, 0.18), transparent 28%),
+                linear-gradient(180deg, var(--bg-1), var(--bg-2) 35%, #07121c 100%);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+            background: rgba(7, 20, 33, 0.55);
+            border-bottom: 1px solid rgba(122, 214, 255, 0.14);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .brand-mark {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 0 18px rgba(122, 214, 255, 0.9);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            padding: 72px 0 48px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--accent);
+            background: rgba(122, 214, 255, 0.08);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: clamp(2.6rem, 6vw, 5rem);
+            line-height: 1;
+            margin: 0 0 18px;
+            letter-spacing: -0.06em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text), var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .lead {
+            max-width: 620px;
+            font-size: 1.1rem;
+            color: var(--muted);
+            line-height: 1.75;
+            margin: 0 0 26px;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid transparent;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, var(--accent), #5bbdf6);
+            color: #062234;
+            box-shadow: 0 10px 30px rgba(122, 214, 255, 0.35);
+        }
+
+        .button.secondary {
+            color: var(--text);
+            border-color: var(--line);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .stats {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            color: var(--muted);
+        }
+
+        .stat {
+            min-width: 110px;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.4rem;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .profile-card {
+            position: relative;
+            background: linear-gradient(180deg, rgba(15, 29, 40, 0.88), rgba(8, 17, 25, 0.9));
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            padding: 22px;
+            box-shadow: 0 20px 60px var(--shadow);
+        }
+
+        .profile-card::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 24px;
+            border: 1px solid rgba(122, 214, 255, 0.22);
+            pointer-events: none;
+        }
+
+        .portrait-wrap {
+            position: relative;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+        }
+
+        .portrait {
+            width: min(270px, 100%);
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 28px;
+            border: 2px solid rgba(122, 214, 255, 0.4);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, rgba(122,214,255,0.18), rgba(146,247,208,0.18));
+        }
+
+        .badge {
+            position: absolute;
+            bottom: 12px;
+            right: 22px;
+            background: rgba(11, 19, 26, 0.95);
+            border: 1px solid rgba(255, 215, 110, 0.4);
+            color: var(--highlight);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.76rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .mini-card {
+            background: rgba(255,255,255,0.025);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 14px 16px;
+            margin-top: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .section {
+            padding: 48px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            margin: 0;
+            letter-spacing: -0.05em;
+        }
+
+        .section-header span {
+            color: var(--accent);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(4, 12, 18, 0.45);
+        }
+
+        .panel p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.03rem;
+            margin: 0;
+        }
+
+        .skills {
+            display: grid;
+            gap: 14px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(122,214,255,0.18);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: var(--text);
+        }
+
+        .skill-item span:last-child {
+            color: var(--accent-2);
+            font-weight: 700;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: linear-gradient(180deg, rgba(15, 29, 40, 0.9), rgba(8, 17, 25, 0.78));
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto auto 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--highlight));
+        }
+
+        .project-tag {
+            display: inline-block;
+            color: var(--highlight);
+            background: rgba(255, 215, 110, 0.08);
+            border: 1px solid rgba(255, 215, 110, 0.25);
+            border-radius: 999px;
+            padding: 7px 10px;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .project-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin: 0 0 16px;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(122,214,255,0.08);
+            border: 1px solid rgba(122,214,255,0.18);
+            color: var(--accent);
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .socials {
+            display: grid;
+            gap: 14px;
+        }
+
+        .social {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--line);
+        }
+
+        .social strong {
+            color: var(--text);
+        }
+
+        .social span {
+            color: var(--muted);
+        }
+
+        .footer {
+            padding: 32px 0 60px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid, .about-grid, .contact, .projects {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .hero {
+                padding-top: 42px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Meu nome é naiko e eu sou um gulosão</h1>
-    <p> eu faço 67 </p>
-    <img src="calmacalabreso.jfif" alt="calma calabresoxx">
+    <header class="topbar">
+        <div class="container nav">
+            <div class="brand">
+                <span class="brand-mark"></span>
+                <span>Naiko</span>
+            </div>
+            <nav class="nav-links" aria-label="Navegação principal">
+                <a href="#sobre">Sobre</a>
+                <a href="#habilidades">Habilidades</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-grid">
+                <div>
+                    <div class="eyebrow">Persona 4-inspired portfolio</div>
+                    <h1>
+                        Eu sou <span class="gradient-text">Naiko</span>,<br />
+                        criador e dev em busca de próxima missão.
+                    </h1>
+                    <p class="lead">
+                        Transformo ideias em experiências com foco em identidade visual, design, desenvolvimento e narrativa.
+                        Gosto de criar projetos que misturam funcionalidade, estilo e personalidade forte.
+                    </p>
+                    <div class="cta-row">
+                        <a class="button primary" href="#projetos">Ver projetos</a>
+                        <a class="button secondary" href="#contato">Entre em contato</a>
+                    </div>
+                    <div class="stats">
+                        <div class="stat">
+                            <strong>2+</strong>
+                            anos de estudo
+                        </div>
+                        <div class="stat">
+                            <strong>6+</strong>
+                            projetos criados
+                        </div>
+                        <div class="stat">
+                            <strong>∞</strong>
+                            ideias em desenvolvimento
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="profile-card" aria-label="Perfil do artista">
+                    <div class="portrait-wrap">
+                        <img class="portrait" src="calmacalabreso.jfif" alt="Retrato de Naiko" />
+                        <span class="badge">Investigator</span>
+                    </div>
+                    <div class="mini-card">
+                        <strong>Protagonista da minha própria jornada</strong><br />
+                        Designer, dev e curioso por mundos digitais.
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section id="sobre" class="section">
+            <div class="section-header">
+                <h2>Sobre mim</h2>
+                <span>Profile</span>
+            </div>
+            <div class="about-grid">
+                <div class="panel">
+                    <p>
+                        Meu nome é Naiko e eu gosto de construir experiências que têm cara própria. Sou apaixonado por estética visual,
+                        identidade e desenvolvimento de projetos que conectam design, código e emoção. Desde pequenos experimentos
+                        até ideias maiores, gosto de transformar conceitos em algo que as pessoas possam sentir e lembrar.
+                    </p>
+                </div>
+                <div class="panel">
+                    <div class="skills" id="habilidades">
+                        <div class="skill-item"><span>Design visual</span><span>Alta</span></div>
+                        <div class="skill-item"><span>HTML / CSS</span><span>Alta</span></div>
+                        <div class="skill-item"><span>Criação de identidade</span><span>Alta</span></div>
+                        <div class="skill-item"><span>UX/UI</span><span>Média</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="section">
+            <div class="section-header">
+                <h2>Projetos</h2>
+                <span>Works</span>
+            </div>
+            <div class="projects">
+                <article class="project-card">
+                    <div class="project-tag">Web</div>
+                    <h3>Portfólio pessoal</h3>
+                    <p>Uma página com visual forte, narrativa envolvente e foco em apresentar minhas ideias e personalidade.</p>
+                    <div class="project-meta">
+                        <span class="chip">HTML</span>
+                        <span class="chip">CSS</span>
+                        <span class="chip">Design</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-tag">Visual</div>
+                    <h3>Estética de marca</h3>
+                    <p>Criação de identidade visual com apelo emocional, tom misterioso e linguagem criativa para posicionamento digital.</p>
+                    <div class="project-meta">
+                        <span class="chip">Branding</span>
+                        <span class="chip">Art</span>
+                        <span class="chip">Story</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-tag">Experiência</div>
+                    <h3>Interfaces criativas</h3>
+                    <p>Exploração de layouts que unem navegação fluida, sensação atmosférica e apelo visual memorable.</p>
+                    <div class="project-meta">
+                        <span class="chip">UI</span>
+                        <span class="chip">UX</span>
+                        <span class="chip">Prototype</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="contato" class="section">
+            <div class="section-header">
+                <h2>Contato</h2>
+                <span>Reach out</span>
+            </div>
+            <div class="contact">
+                <div class="panel">
+                    <p>
+                        Se quiser bater um papo sobre design, desenvolvimento, ideias ou projetos criativos, pode me chamar.
+                        Tenho interesse em colaborar com pessoas que gostam de criar coisas com personalidade e propósito.
+                    </p>
+                </div>
+                <div class="panel socials">
+                    <div class="social">
+                        <strong>E-mail</strong>
+                        <span>naiko@email.com</span>
+                    </div>
+                    <div class="social">
+                        <strong>GitHub</strong>
+                        <span>@naikoArroz</span>
+                    </div>
+                    <div class="social">
+                        <strong>Instagram</strong>
+                        <span>@naiko.art</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer container">
+        © 2026 Naiko Arroz — feito com energia de midnight city vibes.
+    </footer>
 </body>
 </html>
